@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.five.testsys.mapper.ReqGoodMapper">
+    <!-- 在select标签中编写查询的SQL语句，设置select标签的id属性为getUser,id属性必须唯一的，不能重复使用
+    parameterType属性指名查询时使用的参数类型，resultType属性指明查询返回的结果集类型 -->
+
+	<resultMap id="reqGoodMap" type="cn.five.testsys.entity.ReqGood">
+        <id column="eg_id" property="eg_id"/>
+        <result column="req_id" property="req_id"/>
+        <result column="gid" property="gid"/>
+        <result column="req_num" property="req_num"/>
+    </resultMap>
+
+    <select id="getReqGood_req_id" parameterType="int" resultMap="reqGoodMap">
+        SELECT eg_id,req_id,gid,req_num FROM reqGoods WHERE req_id=#{req_id} ;
+    </select>
+    
+    <insert id="save" parameterType="cn.five.testsys.entity.ReqGood" useGeneratedKeys="true" keyColumn="eg_id" keyProperty="eg_id">
+        INSERT INTO reqGoods (  req_id ,gid ,req_num  ) VALUES (  #{req_id}, #{gid} ,#{req_num} );
+    </insert>
+
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.five.testsys.mapper.DelnoteMapper">
+    <!-- 在select标签中编写查询的SQL语句，设置select标签的id属性为getUser,id属性必须唯一的，不能重复使用
+    parameterType属性指名查询时使用的参数类型，resultType属性指明查询返回的结果集类型 -->
+
+    <select id="getDelnote_dem_id" parameterType="int" resultType="cn.five.testsys.entity.Delnote">
+        SELECT del_id,uid,req_uid,dem_id,del_date,evaluation,star FROM delnotes WHERE dem_id=#{dem_id} ;
+    </select>
+    
+    <insert id="save" parameterType="cn.five.testsys.entity.Delnote" useGeneratedKeys="true" keyColumn="del_id" keyProperty="del_id">
+        INSERT INTO delnotes (  uid ,req_uid ,dem_id  ) VALUES (  #{uid}, #{req_uid} ,#{dem_id} );
+    </insert>
+    
+    <update id="update_evaluation" parameterType="cn.five.testsys.entity.Delnote">
+        UPDATE delnotes SET evaluation=#{evaluation} , star=#{star} WHERE del_id=#{del_id};
+    </update>
+
+</mapper>

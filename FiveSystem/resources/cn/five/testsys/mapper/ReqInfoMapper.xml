@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.five.testsys.mapper.ReqInfoMapper">
+    <!-- 在select标签中编写查询的SQL语句，设置select标签的id属性为getUser,id属性必须唯一的，不能重复使用
+    parameterType属性指名查询时使用的参数类型，resultType属性指明查询返回的结果集类型 -->
+
+    <select id="getReqInfo_req_id" parameterType="int" resultType="cn.five.testsys.entity.ReqInfo">
+        SELECT req_id,tit,note,req_uid,dep_id,manage_id,time FROM reqInfos WHERE req_id=#{req_id} ;
+    </select>
+    
+    <select id="getReqInfo_tit" parameterType="String" resultType="cn.five.testsys.entity.ReqInfo">
+        SELECT req_id,tit,note,req_uid,dep_id,manage_id,time FROM reqInfos WHERE tit=#{tit} ;
+    </select>
+    
+    <insert id="save" parameterType="cn.five.testsys.entity.ReqInfo" useGeneratedKeys="true" keyColumn="req_id" keyProperty="req_id">
+        INSERT INTO reqInfos (  tit ,note ,req_uid  ) VALUES (  #{tit}, #{note} ,#{req_uid} );
+    </insert>
+    
+    <update id="updateDep_id" parameterType="cn.five.testsys.entity.ReqInfo">
+        update reqInfos set dep_id=#{dep_id} where req_id=#{req_id} ;
+    </update>
+    
+    <update id="updateManage_id" parameterType="cn.five.testsys.entity.ReqInfo">
+        update reqInfos set manage_id=#{manage_id} where req_id=#{req_id} ;
+    </update>
+
+</mapper>

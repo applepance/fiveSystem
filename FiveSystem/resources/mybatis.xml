@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <settings>
+        <!-- 为所有的命名空间都使用缓存  -->
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+
+    <typeAliases>
+        <!-- 使用这种方式，意味着这个包下的所有类都有别名 -->
+        <!-- 此时这个包下的所有别名 都是 他们自己的类名  -->
+        <package name="cn.five.testsys.entity"/>
+    </typeAliases>
+
+    <!-- 声明环境是 开发模式  -->
+    <environments default="development">
+
+        <environment id="development">
+            <!-- 声明事务 使用的jdbc 中的事务  -->
+            <transactionManager type="JDBC"/>
+
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/five"/>
+                <property name="username" value="root"/>
+                <property name="password" value=""/>
+            </dataSource>
+        </environment>
+
+
+    </environments>
+
+    <mappers>
+        <mapper resource="cn/five/testsys/mapper/UserMapper.xml"/>
+        <mapper resource="cn/five/testsys/mapper/UserCheckMapper.xml"/>
+        <mapper resource="cn/five/testsys/mapper/GoodMapper.xml"/>
+        <mapper resource="cn/five/testsys/mapper/ReqInfoMapper.xml"/>
+        <mapper resource="cn/five/testsys/mapper/ReqGoodMapper.xml"/>
+        <mapper resource="cn/five/testsys/mapper/DemandMapper.xml"/>
+        <mapper resource="cn/five/testsys/mapper/MessageMapper.xml"/>
+        <mapper resource="cn/five/testsys/mapper/PurchaseMapper.xml"/>
+        <mapper resource="cn/five/testsys/mapper/DelnoteMapper.xml"/>
+        <mapper resource="cn/five/testsys/mapper/RecoveryMapper.xml"/>
+    </mappers>
+
+
+</configuration>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.five.testsys.mapper.DemandMapper">
+    <!-- 在select标签中编写查询的SQL语句，设置select标签的id属性为getUser,id属性必须唯一的，不能重复使用
+    parameterType属性指名查询时使用的参数类型，resultType属性指明查询返回的结果集类型 -->
+
+    <select id="getDemand_req_id" parameterType="int" resultType="cn.five.testsys.entity.Demand">
+        SELECT dem_id,uid,req_id FROM demands WHERE req_id=#{req_id} ;
+    </select>
+    
+    <select id="getDemand_dem_id" parameterType="int" resultType="cn.five.testsys.entity.Demand">
+        SELECT dem_id,uid,req_id FROM demands WHERE dem_id=#{dem_id} ;
+    </select>
+    
+    <insert id="save" parameterType="cn.five.testsys.entity.Demand" useGeneratedKeys="true" keyColumn="dem_id" keyProperty="dem_id">
+        INSERT INTO demands (  req_id  ) VALUES (  #{req_id} );
+    </insert>
+
+</mapper>

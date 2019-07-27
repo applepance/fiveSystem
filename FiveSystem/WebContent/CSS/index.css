@@ -1,0 +1,259 @@
+@charset "UTF-8";
+ 		.head {
+    		position: relative;
+        	z-index: 199;
+        	height: 170px;
+        	margin-top: -42px;
+        	background: #eee;
+        	background-position: center -10px;
+        	background-repeat: no-repeat;
+        	margin: 0;
+        	padding: 0;
+		}
+		
+		.head .nav-menu {
+    		position: relative;
+    		z-index: 200;
+    		height: 42px;
+    		color: #222;
+		}
+		
+		.head .nav-menu .blur-bg {
+    		position: absolute;
+    		top: 0;
+    		left: 0;
+    		width: 100%;
+    		height: 100%;
+    		background-position: center -10px;
+    		background-repeat: no-repeat;
+    		filter: blur(4px);
+		}
+		
+		.head .wrapper {
+    		width: 980px;
+		}
+		
+		.head .nav-wrapper {
+    		position: absolute;
+    		left:50%;
+    		transform: translate(-50%, 0%);
+		}
+		
+		.head .nav-menu .nav-mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: hsla(0,0%,100%,.4);
+            box-shadow: 0 1px 2px rgba(0,0,0,.1);
+        }
+        
+        .head .fr {
+    		float: right;
+    		display: inline;
+		}
+		
+		.head .nav-menu .nav-con .nav-item {
+    		float: left;
+    		text-align: center;
+    		line-height: 42px;
+    		height: 42px;
+    		position: relative;
+    		background-color: hsla(0,0%,100%,0);
+    		margin-right: 20px;
+		}
+		
+        body {
+            background: #fff3e7;
+            color: #222;
+            font-family: Microsoft YaHei,-apple-system,PingFang SC,Droid Sans Fallback,Droid Sans,HYQiHei,Arial,Helvetica Neue,Hiragino Sans GB,sans-serif;
+        }
+
+        /*去边框填充优化*/
+        message, aside, blockquote, body, button, code, dd, details, div, dl, dt, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, hr, input, legend, li, menu, nav, ol, p, pre, section, td, textarea, th, ul {
+            margin: 0;
+            padding: 0;
+        }
+        a, a:hover, ins,a:visited {
+    		text-decoration: none;
+    		color: #222;
+		}
+        div {
+            display: block;
+        }
+        label {
+            cursor: default;
+        }
+        .main-body {
+            width: 980px;
+            margin: 0 auto;
+            padding-left: 180px;
+        }
+
+        /*导航栏*/
+        .nav-tab-bar {
+            top: 170px;
+            position: fixed;
+            font-size: 0;
+            transition: .2s;
+            -webkit-transition: .2s;
+        }
+        /*导航栏标签*/
+        .nav-tab-bar .tab-item {
+            font-size: 14px;
+            display: block;
+            cursor: pointer;
+            margin-left: -180px;
+            margin-right: 40px;
+            margin-top: 32px;
+            color: #222;
+            line-height: 28px;
+            width: 110px;
+        }
+        .nav-tab-bar .tab-item span {
+    		vertical-align: middle;
+		}
+		.nav-tab-bar .tab-item:hover {
+			color: #cfb3b1;
+		}
+
+        /*消息盒*/
+        .page-content {
+            font-size: 0;
+            padding-top: 30px;
+            width: 940px;
+            display: inline-block;
+            margin-right: 40px;
+            vertical-align: top;
+        }
+
+        .page-content .partitio-name {
+            line-height: 25px;
+            font-size: 18px;
+            color: #222;
+        }
+
+        /*单个消息块*/
+        .page-content .message-list .message-list-holder .message-item{
+            background: #fff3e7;
+            border-bottom: 1px solid #a5b54a;
+            cursor: pointer;
+        }
+        .page-content  .message-list .message-list-holder .message-item .item-holder {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 20px 0;
+        }
+        .page-content .message-list .message-list-holder .message-item .item-holder .message-content {
+            position: relative;
+            width: 800px;
+            margin-right: 20px;
+            display: inline-block;
+            vertical-align: top;
+        }
+        /*标题块*/
+        .page-content .message-list .message-list-holder .message-item .item-holder .message-title-holder {
+            max-width: 100%;
+            font-size: 20px;
+            color: #212121;
+            line-height: 26px;
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        /*标题文本规范*/
+        .page-content .message-list .message-list-holder .message-item .item-holder .message-title-holder .message-title {
+            transition: .3s;
+            display: inline-block;
+            vertical-align: top;
+            -webkit-box-orient: vertical;
+            word-break: break-all;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        /*文章副栏块*/
+        .page-content .message-list .message-list-holder .message-item .item-holder .blank {
+            margin-top: 4px;
+            letter-spacing: 0;
+            height: 22px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .page-content .message-list .message-list-holder .message-item .item-holder .message-info-bar {
+            font-size: 0;
+            color: #99a2aa;
+            line-height: 24px;
+            height: 24px;
+            bottom: 0;
+            vertical-align: top;
+        }
+        /*副栏申请块*/
+        .page-content .message-list .message-list-holder .message-item .item-holder .message-info-bar .up-content {
+            font-size: 0;
+            display: inline-block;
+            line-height: 20px;
+            vertical-align: top;
+            margin-right: 22px;
+        }
+        .page-content .message-list .message-list-holder .message-item .item-holder .message-info-bar .font {
+            margin-right: 25px;
+            color: #99a2aa;
+            font-size: 12px;
+        }
+        .page-content .message-list .message-list-holder .message-item .item-holder .message-info-bar .up-content .font {
+            margin-left: 5px;
+            font-size: 12px;
+            color: #99a2aa;
+            line-height: 16px;
+            vertical-align: middle;
+            max-width: 120px;
+            display: inline-block;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .page-content .message-list .message-list-holder .message-item .item-holder .message-info-bar .up-content .nick-name {
+            margin-left: 5px;
+            font-size: 12px;
+            color: #99a2aa;
+            line-height: 16px;
+            vertical-align: middle;
+            max-width: 120px;
+            display: inline-block;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        /*状态块*/
+        .page-content .message-list .message-list-holder .message-item .item-holder .message-info-bar .status {
+            margin-right: 25px;
+            color: #99a2aa;
+            font-size: 12px;
+        }
+        /*时间块*/
+        .page-content .message-list .message-list-holder .message-item .item-holder .message-info-bar .time {
+            margin-right: 25px;
+            color: #99a2aa;
+            font-size: 12px;
+        }
+        .page-content .pages {
+            width: 924px;
+            height: 40px;
+            padding: 30px 27px 35px;
+            margin-left: auto;
+            margin-right: auto;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+            background: #fff3e7;
+            text-align: center;
+            line-height: 40px;
+            font-family: Arial;
+            margin: 0 0 5px;
+            display: block;
+            margin-right: 25px;
+            color: #99a2aa;
+            font-size: 12px;
+        }

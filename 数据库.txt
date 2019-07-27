@@ -1,0 +1,148 @@
+1用户表users
+用户号uid		|| 用户名uname		|| 密码pwd	|| 权限power				||
+			||				||			|| Non/Knight/Queen/King	||
+
+create table users(
+            uid int(10) primary key  auto_increment  ,
+            uname varchar(20) not null unique ,
+            pwd varchar(20) not null,
+            power varchar(30) not null
+ );
+insert into users(uname,pwd,power)values('一般孤儿','123456w','Non');
+insert into users(uname,pwd,power)values('二般孤儿','123456w','Queen');
+update users set pwd='123w456' where uid=2;
+insert into users(uname,pwd,power)values('一般用户','123456','Non');
+
+2职工关系表userChecks
+随便主键号uc_id	|| 下属员工号ass_id		|| 领导号 leader_id	||
+				||					||				||
+
+create table userChecks(
+            uc_id int(10) primary key  auto_increment  ,
+            ass_id int(10) not null  ,
+	    leader_id int(10) not null
+ );
+ insert into userChecks(ass_id,leader_id)values(1,2);
+ DELETE FROM userChecks WHERE  uc_id=2;
+  insert into userChecks(ass_id,leader_id)values(6,2);
+
+3物资表goods
+物号 gid	|| 物名 gname	|| 库存 gnum	|| 状态 gstatus		|| 类型 gtype			||
+		||			||			||  in-use/waiting	|| Disposable/Recyclable	||
+
+create table goods(
+            gid int(10) primary key  auto_increment  ,
+            gname varchar(20) not null ,
+            gnum int(10) not null,
+            gstatus varchar(30) default 'in-use',
+	    gtype varchar(20)not null
+ );
+  insert into goods(gname,gnum,gstatus,gtype)values('电脑',5,'in-use','Recyclable');
+  insert into goods(gname,gnum,gstatus,gtype)values('投影仪',3,'waiting','Recyclable');
+    insert into goods(gname,gnum,gstatus,gtype)values('桌子',10,'waiting','Recyclable');
+
+4申请单信息表reqInfos
+单号req_id	|| 标题tit	|| 备注note	|| 申请人号req_uid	|| 部门领导号dep_id	|| 归口领导号manage_id	|| 申请时间time			||
+			||		||			||				||		0		||		0			|| CURRENT_TIMESTAMP	||
+
+create table reqInfos(
+            req_id int(10) primary key  auto_increment  ,
+            tit varchar(20) not null ,
+	    note varchar(2000) ,
+            req_uid int(10) not null,
+	    foreign key ( req_uid ) references users( uid ) ,
+            dep_id int(10) default 0 ,
+	    manage_id int(10) default 0 ,
+	    time timestamp NULL default CURRENT_TIMESTAMP
+ );
+   insert into reqInfos(tit,note,req_uid)values('标题','长长长长长长长曹操曹操曹操曹操曹操曹操曹操曹操曹操曹操曹操曹操曹操曹操曹操曹操曹操曹操曹操曹操曹操曹操传的备注'
+   ,1);
+
+5申请单物资表reqGoods
+随便啥主键号eg_id	|| 单号req_id	|| 物号gid	|| 需求数req_num	||
+				||			||		||				||
+create table reqGoods(
+            eg_id int(10) primary key  auto_increment  ,
+            req_id int(10) not null ,
+	    foreign key ( req_id ) references reqInfos( req_id ) ,
+	    gid int(10) not null ,
+	    foreign key ( gid ) references goods( gid ) ,
+            req_num int(10) not null
+ );
+   insert into reqGoods(req_id,gid,req_num)values(1,1,2);
+
+
+6需求单demands
+需求单号dem_id	|| 调配人uid	|| 申请单号req_id	||
+				||	0		||				||
+create table demands(
+            dem_id int(10) primary key  auto_increment  ,
+            uid int(10) not null default 0,
+	    req_id int(10) not null ,
+	    foreign key ( req_id ) references reqInfos( req_id )
+ );
+ insert into demands(req_id)values(1);
+
+
+
+7消息表messages
+随便主键号mes_id	|| 消息所属人uid	|| 申请单号req_id	|| 需求单号dem_id	||
+				||				||		0		||		0		||
+create table messages(
+            mes_id int(10) primary key  auto_increment  ,
+            uid int(10) not null ,
+	    foreign key ( uid ) references users( uid ) ,
+	    req_id int(10) not null default 0,
+            dem_id int(10) not null default 0
+ );
+  insert into messages(uid,req_id)values(1,1);
+  insert into messages(uid,dem_id)values(4,1);
+
+
+
+8采购单 purchases （同时给物资表goods插入数据，当dem_id=0，插入的状态gstatus=waiting）
+随便主键号pur_id	|| 需求单号dem_id	|| 物名gname	|| 采购数量gnum	|| 类型gtype	|| 采购时间pur_date			||
+				||		0		||			||				||			|| CURRENT_TIMESTAMP	||
+create table purchases(
+            pur_id int(10) primary key  auto_increment  ,
+            dem_id int(10) not null default 0,
+	    gname varchar(20) not null ,
+	    gnum int(10) not null,
+	    gtype varchar(20)not null,
+	    pur_date timestamp NULL default CURRENT_TIMESTAMP
+ );
+  insert into purchases(dem_id,gname,gnum,gtype)values(1,'投影仪',2,'Recyclable');
+  insert into goods(gname,gnum,gtype)values('投影仪',2,'Recyclable');
+
+  insert into purchases(gname,gnum,gtype)values('书夹',50,'Disposable');
+  insert into goods(gname,gnum,gstatus,gtype)values('书夹',50,'waiting','Disposable');
+
+
+
+9送货单delnotes（提醒下申请人）
+随便主键号del_id	|| 调配人uid	|| 申请人req_uid	|| 需求单号dem_id	|| 送货时间del_date			|| 评价evaluation	|| 星star	||
+				||			||				||				|| CURRENT_TIMESTAMP	||				||		||
+create table delnotes(
+            del_id int(10) primary key  auto_increment  ,
+            uid int(10) not null ,
+	    req_uid int(10) not null ,
+	    dem_id int(10) not null,
+	    foreign key ( dem_id ) references demands( dem_id ) ,
+	    del_date timestamp NULL default CURRENT_TIMESTAMP,
+	    evaluation varchar(2000) ,
+	    star int(5)
+ );
+  insert into delnotes(uid,req_uid,dem_id,evaluation,star)values(4,1,1,'勉勉强强还行吧，下次努力哦！',1);
+
+10回收表recovery
+随便主键号rec_id	|| 需求单号dem_id	|| 评价evaluation	|| 回收时间rec_date			|| 星star	||
+				||				||				||	CURRENT_TIMESTAMP	||		||
+create table recovery(
+            rec_id int(10) primary key  auto_increment  ,
+            dem_id int(10) not null ,
+	    foreign key ( dem_id ) references demands( dem_id ) ,
+	    evaluation varchar(2000) ,
+	    rec_date timestamp NULL default CURRENT_TIMESTAMP,
+	    star int(5)
+ );
+   insert into recovery(dem_id,evaluation,star)values(1,'勉勉强强不行吧，下次等死哦！',1);

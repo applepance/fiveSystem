@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.five.testsys.mapper.MessageMapper">
+
+    <resultMap id="messageMap" type="cn.five.testsys.entity.Message">
+        <id column="mes_id" property="mes_id"/>
+        <result column="uid" property="uid"/>
+        <result column="req_id" property="req_id"/>
+        <result column="dem_id" property="dem_id"/>
+    </resultMap>
+
+    <!-- 在select标签中编写查询的SQL语句，设置select标签的id属性为getUser,id属性必须唯一的，不能重复使用
+    parameterType属性指名查询时使用的参数类型，resultType属性指明查询返回的结果集类型 -->
+
+    <select id="getMessage_uid" parameterType="int" resultMap="messageMap">
+        SELECT mes_id,uid,req_id,dem_id FROM messages WHERE uid=#{uid} ;
+    </select>
+    
+    <insert id="save" parameterType="cn.five.testsys.entity.Message" useGeneratedKeys="true" keyColumn="mes_id" keyProperty="mes_id">
+        INSERT INTO messages (  uid ,req_id ,dem_id  ) VALUES (  #{uid}, #{req_id} ,#{dem_id} );
+    </insert>
+    
+
+</mapper>
